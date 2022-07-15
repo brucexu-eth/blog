@@ -1,0 +1,44 @@
+# favicon path to your logo
+favicon:
+
+# canvas
+canvasbg:
+  enabled: false
+  color:
+  opacity:
+  count:
+
+# personal links
+## links icon base folder
+linkiconbase: /images/links/
+## array of links
+links:
+  - name: lxdao.io
+    link: https://lxdao.io
+    icon: lxdao.png
+
+# pagination
+pagination:
+  prev_text: '<'
+  next_text: '>'
+
+# whether to display `CC BY-SA 4.0` declaration
+declaration: false
+
+# comment
+waline:
+  enabled: false
+  appId:
+  appKey:
+  placeholder:
+  avatar:
+  emoji:
+    bilibili: true
+    qq: true
+    tieba: true
+    twitter: true
+    alus: true
+    weibo: true
+
+# google site verification
+verimeta:
