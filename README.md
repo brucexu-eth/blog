@@ -1,21 +1,7 @@
-![Hexo Logo](https://github.com/vercel/vercel/blob/main/packages/frameworks/logos/hexo.svg)
+# Bruce's Blog
 
-# Hexo Example
+Hi I'm Bruce Xu. I'm a Web3 Buidler | Ethernaut | Cypherpunk-aligned | INTJ | Co-initiator @LXDAO_Official @ethpanda_org | Buidling cool innovations (I think).
 
-This directory is a brief example of a [Hexo](https://hexo.io/) site that can be deployed to Vercel with zero configuration.
+X: https://x.com/brucexu_eth
 
-## Deploy Your Own
-
-Deploy your own Hexo project with Vercel.
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/vercel/tree/main/examples/hexo&template=hexo)
-
-_Live Example: https://hexo-template.vercel.app_
-
-### How We Created This Example
-
-To get started with Hexo for deployment with Vercel, you can use the [Hexo CLI](https://hexo.io/docs/index.html#Installation) to initialize the project:
-
-```shell
-$ hexo init project-name
-```
+Blog topics: Ethereum, Development, Web3, DAO, Digital Society, Public Goods, open-source, etc.
