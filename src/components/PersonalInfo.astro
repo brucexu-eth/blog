@@ -1,0 +1,183 @@
+---
+export interface Props {
+  lang?: 'zh' | 'en';
+  showAvatar?: boolean;
+  showLinks?: boolean;
+}
+
+const { lang = 'zh', showAvatar = true, showLinks = true } = Astro.props;
+
+const personalInfo = {
+  zh: {
+    name: '你的名字',
+    bio: '这里是你的个人简介，可以介绍你的背景、兴趣和专业领域。',
+    description: '开发者 | 创作者 | 思考者'
+  },
+  en: {
+    name: 'Your Name',
+    bio: 'This is your personal bio where you can introduce your background, interests, and expertise.',
+    description: 'Developer | Creator | Thinker'
+  }
+};
+
+const info = personalInfo[lang];
+
+const socialLinks = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/yourusername',
+    icon: 'github'
+  },
+  {
+    name: 'Twitter',
+    url: 'https://twitter.com/yourusername',
+    icon: 'twitter'
+  },
+  {
+    name: 'Email',
+    url: 'mailto:your@email.com',
+    icon: 'email'
+  },
+  {
+    name: 'RSS',
+    url: '/rss.xml',
+    icon: 'rss'
+  },
+  {
+    name: 'Telegram',
+    url: 'https://t.me/yourusername',
+    icon: 'telegram'
+  },
+  {
+    name: 'Farcaster',
+    url: 'https://warpcast.com/yourusername',
+    icon: 'farcaster'
+  }
+];
+---
+
+<div class="flex flex-col items-center text-center space-y-6">
+  {showAvatar && (
+    <div class="relative group">
+      <div class="w-32 h-32 rounded-full bg-gradient-to-br from-blue-400 to-purple-600 p-1">
+        <img
+          src="/avatar.jpg"
+          alt={info.name}
+          class="w-full h-full rounded-full object-cover bg-gray-200 dark:bg-gray-700"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+        />
+        <!-- Fallback avatar -->
+        <div class="hidden w-full h-full rounded-full bg-gray-200 dark:bg-gray-700 items-center justify-center text-4xl font-bold text-gray-600 dark:text-gray-400">
+          {info.name.charAt(0)}
+        </div>
+      </div>
+      <!-- Easter egg: click animation -->
+      <div class="absolute inset-0 rounded-full bg-gradient-to-br from-yellow-400 to-pink-500 opacity-0 group-hover:opacity-20 transition-opacity duration-300 cursor-pointer" id="avatar-easter-egg"></div>
+    </div>
+  )}
+
+  <div class="space-y-2">
+    <h1 class="text-3xl font-bold text-gray-900 dark:text-white">
+      {info.name}
+    </h1>
+    <p class="text-lg text-gray-600 dark:text-gray-400">
+      {info.description}
+    </p>
+    <p class="text-gray-700 dark:text-gray-300 max-w-md mx-auto">
+      {info.bio}
+    </p>
+  </div>
+
+  {showLinks && (
+    <div class="flex flex-wrap justify-center gap-4">
+      {socialLinks.map((link) => (
+        <a
+          href={link.url}
+          target={link.name !== 'Email' && link.name !== 'RSS' ? '_blank' : undefined}
+          rel={link.name !== 'Email' && link.name !== 'RSS' ? 'noopener noreferrer' : undefined}
+          class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          aria-label={link.name}
+        >
+          <span class="w-5 h-5">
+            {link.icon === 'github' && (
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            )}
+            {link.icon === 'twitter' && (
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            )}
+            {link.icon === 'email' && (
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            )}
+            {link.icon === 'rss' && (
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M6.503 20.752c0 1.794-1.456 3.248-3.251 3.248-1.796 0-3.252-1.454-3.252-3.248 0-1.794 1.456-3.248 3.252-3.248 1.795.001 3.251 1.454 3.251 3.248zm-6.503-12.572v4.811c6.05.062 10.96 4.966 11.022 11.009h4.817c-.062-8.71-7.118-15.758-15.839-15.82zm0-3.368c10.58.046 19.152 8.594 19.183 19.188h4.817c-.03-13.231-10.755-23.954-24-24v4.812z"/>
+              </svg>
+            )}
+            {link.icon === 'telegram' && (
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+              </svg>
+            )}
+            {link.icon === 'farcaster' && (
+              <svg fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.568 8.16c-.169-.185-.4-.29-.64-.29-.185 0-.37.063-.515.185L12 11.76 7.587 8.055c-.145-.122-.33-.185-.515-.185-.24 0-.471.105-.64.29-.185.2-.29.471-.29.754v6.172c0 .566.46 1.026 1.026 1.026.566 0 1.026-.46 1.026-1.026v-3.172l2.806 2.341c.145.122.33.185.515.185s.37-.063.515-.185l2.806-2.341v3.172c0 .566.46 1.026 1.026 1.026.566 0 1.026-.46 1.026-1.026V8.914c0-.283-.105-.554-.29-.754z"/>
+              </svg>
+            )}
+          </span>
+          <span class="text-sm font-medium">{link.name}</span>
+        </a>
+      ))}
+    </div>
+  )}
+</div>
+
+<script>
+  // Easter egg for avatar click
+  const avatar = document.getElementById('avatar-easter-egg');
+  let clickCount = 0;
+
+  avatar?.addEventListener('click', () => {
+    clickCount++;
+    if (clickCount >= 5) {
+      // Create confetti effect or fun animation
+      const confetti = document.createElement('div');
+      confetti.innerHTML = '🎉';
+      confetti.style.position = 'fixed';
+      confetti.style.left = '50%';
+      confetti.style.top = '50%';
+      confetti.style.fontSize = '2rem';
+      confetti.style.zIndex = '9999';
+      confetti.style.pointerEvents = 'none';
+      confetti.style.animation = 'bounce 1s ease-in-out';
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.remove();
+        clickCount = 0;
+      }, 1000);
+    }
+  });
+</script>
+
+<style>
+  @keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+      transform: translate(-50%, -50%) translateY(0);
+    }
+    40%, 43% {
+      transform: translate(-50%, -50%) translateY(-30px);
+    }
+    70% {
+      transform: translate(-50%, -50%) translateY(-15px);
+    }
+    90% {
+      transform: translate(-50%, -50%) translateY(-4px);
+    }
+  }
+</style>
