@@ -1,11 +1,10 @@
 ---
 export interface Props {
   title: string;
-  description: string;
+  description?: string;
   href: string;
   date?: Date;
   tags?: string[];
-  image?: string;
   type?: 'blog' | 'project' | 'interview' | 'experiment';
   lang?: 'zh' | 'en';
 }
@@ -16,17 +15,16 @@ const {
   href,
   date,
   tags = [],
-  image,
   type = 'blog',
   lang = 'zh'
 } = Astro.props;
 
 const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat(lang === 'zh' ? 'zh-CN' : 'en-US', {
+  return date.toLocaleDateString(lang === 'zh' ? 'zh-CN' : 'en-US', {
     year: 'numeric',
-    month: 'long',
+    month: 'short',
     day: 'numeric'
-  }).format(date);
+  });
 };
 
 const typeColors = {
@@ -52,51 +50,32 @@ const typeLabels = {
 };
 ---
 
-<article class="group bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-200 dark:border-gray-700 overflow-hidden">
-  <a href={href} class="block">
-    {image && (
-      <div class="aspect-video overflow-hidden">
-        <img
-          src={image}
-          alt={title}
-          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          loading="lazy"
-        />
-      </div>
-    )}
+<article class="group">
+  <a href={href} class="block space-y-2 hover:opacity-60 transition-opacity">
+    <h3 class="text-lg font-medium text-gray-900 group-hover:text-gray-600 transition-colors">
+      {title}
+    </h3>
 
-    <div class="p-6">
-      <div class="flex items-center justify-between mb-3">
-        <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${typeColors[type]}`}>
-          {typeLabels[lang][type]}
-        </span>
-        {date && (
-          <time class="text-sm text-gray-500 dark:text-gray-400">
-            {formatDate(date)}
-          </time>
-        )}
-      </div>
-
-      <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors line-clamp-2">
-        {title}
-      </h3>
-
-      <p class="text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+    {description && (
+      <p class="text-gray-600 text-sm leading-relaxed">
         {description}
       </p>
+    )}
+
+    <div class="flex items-center justify-between text-xs text-gray-500">
+      {date && (
+        <time datetime={date.toISOString()}>
+          {formatDate(date)}
+        </time>
+      )}
 
       {tags.length > 0 && (
-        <div class="flex flex-wrap gap-2">
-          {tags.slice(0, 3).map((tag) => (
-            <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
-              #{tag}
+        <div class="flex gap-2">
+          {tags.slice(0, 2).map((tag) => (
+            <span class="text-gray-400">
+              {tag}
             </span>
           ))}
-          {tags.length > 3 && (
-            <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400">
-              +{tags.length - 3}
-            </span>
-          )}
         </div>
       )}
     </div>

@@ -36,31 +36,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
     <title>{title}</title>
   </head>
-  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+  <body class="bg-white text-gray-900 font-sans antialiased">
     <slot />
   </body>
 </html>
 
 <style is:global>
   html {
-    font-family: system-ui, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     scroll-behavior: smooth;
   }
 
   body {
     line-height: 1.6;
+    color: #333;
   }
 
-  /* 代码块样式 */
+  /* 简化代码块样式 */
   pre {
-    @apply rounded-lg p-4 overflow-x-auto;
+    @apply bg-gray-50 rounded-lg p-4 overflow-x-auto border;
   }
 
   code {
-    @apply bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm;
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
   }
 
   pre code {
     @apply bg-transparent p-0;
+  }
+
+  /* 链接样式 */
+  a {
+    @apply text-gray-900 transition-colors;
+  }
+
+  a:hover {
+    @apply text-gray-600;
   }
 </style>

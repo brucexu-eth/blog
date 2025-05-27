@@ -1,0 +1,148 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: project,
+  }));
+}
+
+type Props = CollectionEntry<'projects'>;
+
+const project = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+  <Navigation currentPath="/blog/projects" lang={project.data.lang} />
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <article>
+      <header class="mb-12">
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">
+          {project.data.title}
+        </h1>
+
+        <div class="flex items-center gap-4 text-sm text-gray-500 mb-6">
+          {project.data.tech && project.data.tech.length > 0 && (
+            <div class="flex gap-2">
+              {project.data.tech.map((tech) => (
+                <span class="text-gray-400">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
+
+          {project.data.featured && (
+            <span class="text-blue-600 font-medium">精选项目</span>
+          )}
+        </div>
+
+        {project.data.description && (
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            {project.data.description}
+          </p>
+        )}
+
+        {(project.data.github || project.data.demo) && (
+          <div class="flex gap-4">
+            {project.data.github && (
+              <a
+                href={project.data.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-500 hover:text-gray-900 transition-colors underline"
+              >
+                GitHub →
+              </a>
+            )}
+            {project.data.demo && (
+              <a
+                href={project.data.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-sm text-gray-500 hover:text-gray-900 transition-colors underline"
+              >
+                Live Demo →
+              </a>
+            )}
+          </div>
+        )}
+      </header>
+
+      <div class="prose prose-lg max-w-none">
+        <Content />
+      </div>
+    </article>
+
+    <footer class="mt-16 pt-8 border-t border-gray-200">
+      <a
+        href="/blog/projects"
+        class="text-sm text-gray-500 hover:text-gray-900 transition-colors"
+      >
+        ← 返回项目列表
+      </a>
+    </footer>
+  </main>
+</BaseLayout>
+
+<style>
+  .prose {
+    @apply text-gray-700 leading-relaxed;
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-gray-900 font-bold;
+  }
+
+  .prose h2 {
+    @apply text-2xl mt-12 mb-4;
+  }
+
+  .prose h3 {
+    @apply text-xl mt-8 mb-3;
+  }
+
+  .prose p {
+    @apply mb-4;
+  }
+
+  .prose a {
+    @apply text-gray-900 underline hover:text-gray-600;
+  }
+
+  .prose ul,
+  .prose ol {
+    @apply mb-4 pl-6;
+  }
+
+  .prose li {
+    @apply mb-2;
+  }
+
+  .prose blockquote {
+    @apply border-l-4 border-gray-200 pl-4 italic text-gray-600 my-6;
+  }
+
+  .prose code {
+    @apply bg-gray-100 px-1 py-0.5 rounded text-sm;
+  }
+
+  .prose pre {
+    @apply bg-gray-50 rounded-lg p-4 overflow-x-auto border my-6;
+  }
+
+  .prose pre code {
+    @apply bg-transparent p-0;
+  }
+</style>

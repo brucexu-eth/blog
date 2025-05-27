@@ -8,22 +8,18 @@ const timeline = [
     year: '2024',
     title: 'LXDAO',
     description: '发起并参与建设 LXDAO，一个专注于 Web3 技术研究和开发的去中心化自治组织。',
-    link: 'https://lxdao.io',
-    status: 'active'
+    link: 'https://lxdao.io'
   },
   {
     year: '2023',
     title: 'ETHPanda',
     description: '创建 ETHPanda 项目，致力于推广以太坊生态系统在中文社区的发展。',
-    link: 'https://ethpanda.org',
-    status: 'active'
+    link: 'https://ethpanda.org'
   },
   {
     year: '2022',
     title: '研究项目',
-    description: '开始专注于区块链技术研究，探索去中心化应用的可能性。',
-    link: 'https://www.joshuatan.com/research/',
-    status: 'completed'
+    description: '开始专注于区块链技术研究，探索去中心化应用的可能性。'
   }
 ];
 
@@ -63,139 +59,71 @@ const workWithMe = [
 <BaseLayout title="关于我 - 个人博客" description="了解更多关于我的背景、项目经历和专业领域。">
   <Navigation currentPath="/blog/about" lang="zh" />
 
-  <main class="min-h-screen bg-gray-50 dark:bg-gray-900">
-    <!-- Hero Section -->
-    <section class="py-20 px-4 sm:px-6 lg:px-8">
-      <div class="max-w-4xl mx-auto">
-        <PersonalInfo lang="zh" showAvatar={true} showLinks={false} />
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <!-- Personal Info -->
+    <section class="mb-16">
+      <PersonalInfo lang="zh" showAvatar={true} showLinks={false} />
+    </section>
+
+    <!-- About -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">About</h2>
+      <div class="prose prose-lg max-w-none">
+        <p class="text-gray-700 leading-relaxed mb-4">
+          我是一名热衷于 Web3 技术和去中心化创新的开发者。在过去几年中，我专注于区块链技术的研究与应用，
+          致力于构建更加开放、透明和去中心化的数字世界。
+        </p>
+        <p class="text-gray-700 leading-relaxed mb-4">
+          通过参与和发起多个开源项目，我深信技术的力量能够推动社会进步。我喜欢与志同道合的人合作，
+          共同探索技术的边界，创造有价值的产品和服务。
+        </p>
+        <p class="text-gray-700 leading-relaxed">
+          除了技术开发，我也热衷于技术写作和知识分享，希望通过我的经验帮助更多人了解和参与到 Web3 的世界中来。
+        </p>
       </div>
     </section>
 
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-      <!-- Personal Introduction -->
-      <section class="mb-16">
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
-          <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">个人介绍</h2>
-          <div class="prose prose-lg dark:prose-invert max-w-none">
-            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              我是一名热衷于 Web3 技术和去中心化创新的开发者。在过去几年中，我专注于区块链技术的研究与应用，
-              致力于构建更加开放、透明和去中心化的数字世界。
-            </p>
-            <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-              通过参与和发起多个开源项目，我深信技术的力量能够推动社会进步。我喜欢与志同道合的人合作，
-              共同探索技术的边界，创造有价值的产品和服务。
-            </p>
-            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
-              除了技术开发，我也热衷于技术写作和知识分享，希望通过我的经验帮助更多人了解和参与到 Web3 的世界中来。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Timeline -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">项目与研究时间线</h2>
-        <div class="space-y-6">
-          {timeline.map((item, index) => (
-            <div class="relative">
-              {index !== timeline.length - 1 && (
-                <div class="absolute left-4 top-12 w-0.5 h-full bg-gray-200 dark:bg-gray-700"></div>
-              )}
-              <div class="flex items-start space-x-4">
-                <div class={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white ${
-                  item.status === 'active' ? 'bg-green-500' : 'bg-blue-500'
-                }`}>
-                  {item.year.slice(-2)}
-                </div>
-                <div class="flex-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
-                  <div class="flex items-center justify-between mb-2">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                      {item.link ? (
-                        <a href={item.link} target="_blank" rel="noopener noreferrer" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-                          {item.title} ↗
-                        </a>
-                      ) : (
-                        item.title
-                      )}
-                    </h3>
-                    <span class={`px-2 py-1 rounded-full text-xs font-medium ${
-                      item.status === 'active'
-                        ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400'
-                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400'
-                    }`}>
-                      {item.status === 'active' ? '进行中' : '已完成'}
-                    </span>
-                  </div>
-                  <p class="text-gray-600 dark:text-gray-300">{item.description}</p>
-                </div>
+    <!-- Timeline -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-8">Timeline</h2>
+      <div class="space-y-8">
+        {timeline.map((item) => (
+          <div class="border-l-2 border-gray-200 pl-6 relative">
+            <div class="absolute w-3 h-3 bg-gray-400 rounded-full -left-2 top-1"></div>
+            <div class="space-y-2">
+              <div class="flex items-center gap-3">
+                <span class="text-sm text-gray-500 font-mono">{item.year}</span>
+                <h3 class="text-lg font-medium text-gray-900">
+                  {item.link ? (
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" class="hover:text-gray-600 transition-colors">
+                      {item.title} ↗
+                    </a>
+                  ) : (
+                    item.title
+                  )}
+                </h3>
               </div>
+              <p class="text-gray-600 leading-relaxed">{item.description}</p>
             </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- Interests -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">关注领域</h2>
-        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-8">
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {interests.map((interest) => (
-              <div class="flex items-center space-x-3 p-3 rounded-lg bg-gray-50 dark:bg-gray-700">
-                <div class="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span class="text-gray-700 dark:text-gray-300 font-medium">{interest}</span>
-              </div>
-            ))}
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </section>
 
-      <!-- Work With Me -->
-      <section class="mb-16">
-        <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">与我合作</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {workWithMe.map((service) => (
-            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 hover:shadow-md transition-shadow">
-              <div class="flex items-start space-x-4">
-                <div class="text-3xl">{service.icon}</div>
-                <div>
-                  <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-                    {service.title}
-                  </h3>
-                  <p class="text-gray-600 dark:text-gray-300">
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <!-- Contact CTA -->
-      <section class="text-center">
-        <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-8 text-white">
-          <h2 class="text-2xl font-bold mb-4">让我们一起创造有意义的项目</h2>
-          <p class="text-blue-100 mb-6 max-w-2xl mx-auto">
-            如果您有有趣的项目想法，或者希望在 Web3 领域进行合作，我很乐意与您交流。
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a
-              href="mailto:your@email.com"
-              class="inline-flex items-center justify-center px-6 py-3 bg-white text-blue-600 font-medium rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              发送邮件
-            </a>
-            <a
-              href="https://twitter.com/yourusername"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center px-6 py-3 border border-white/20 text-white font-medium rounded-lg hover:bg-white/10 transition-colors"
-            >
-              Twitter 联系
-            </a>
-          </div>
-        </div>
-      </section>
-    </div>
+    <!-- Contact -->
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Get in touch</h2>
+      <p class="text-gray-700 leading-relaxed mb-6">
+        如果您有有趣的项目想法，或者希望在 Web3 领域进行合作，我很乐意与您交流。
+      </p>
+      <div class="flex gap-4 text-sm">
+        <a href="mailto:your@email.com" class="text-gray-500 hover:text-gray-900 transition-colors underline">
+          Email
+        </a>
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-gray-900 transition-colors underline">
+          Twitter
+        </a>
+      </div>
+    </section>
   </main>
 </BaseLayout>

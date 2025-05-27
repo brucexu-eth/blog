@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import ContentCard from '../components/ContentCard.astro';
+import { getCollection } from 'astro:content';
+
+const allBlogPosts = await getCollection('blog', ({ data }) => {
+  return data.lang === 'zh' && !data.draft;
+});
+
+const sortedPosts = allBlogPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout title="文章 - 个人博客" description="我的所有文章和思考">
+  <Navigation currentPath="/blog/blog" lang="zh" />
+
+  <main class="max-w-4xl mx-auto px-6 py-12">
+    <header class="mb-12">
+      <h1 class="text-3xl font-bold text-gray-900 mb-4">Writing</h1>
+      <p class="text-gray-600 leading-relaxed">
+        这里记录了我的思考、学习和经验分享。
+      </p>
+    </header>
+
+    <div class="space-y-12">
+      {sortedPosts.map((post) => (
+        <ContentCard
+          title={post.data.title}
+          description={post.data.description}
+          href={`/blog/blog/${post.slug}`}
+          date={post.data.pubDate}
+          tags={post.data.tags}
+          type="blog"
+          lang="zh"
+        />
+      ))}
+    </div>
+
+    {sortedPosts.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-gray-500">暂无文章</p>
+      </div>
+    )}
+  </main>
+</BaseLayout>
