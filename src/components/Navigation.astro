@@ -8,20 +8,20 @@ const { currentPath = '', lang = 'zh' } = Astro.props;
 
 const navItems = {
   zh: [
-    { href: '/', label: '首页' },
-    { href: '/blog', label: '文章' },
-    { href: '/projects', label: '项目' },
-    { href: '/interviews', label: '访谈' },
-    { href: '/experiments', label: '实验' },
-    { href: '/about', label: '关于我' },
+    { href: '/blog/', label: '首页' },
+    { href: '/blog/blog', label: '文章' },
+    { href: '/blog/projects', label: '项目' },
+    { href: '/blog/interviews', label: '访谈' },
+    { href: '/blog/experiments', label: '实验' },
+    { href: '/blog/about', label: '关于我' },
   ],
   en: [
-    { href: '/en', label: 'Home' },
-    { href: '/en/blog', label: 'Blog' },
-    { href: '/en/projects', label: 'Projects' },
-    { href: '/en/interviews', label: 'Interviews' },
-    { href: '/en/experiments', label: 'Experiments' },
-    { href: '/en/about', label: 'About' },
+    { href: '/blog/en', label: 'Home' },
+    { href: '/blog/en/blog', label: 'Blog' },
+    { href: '/blog/en/projects', label: 'Projects' },
+    { href: '/blog/en/interviews', label: 'Interviews' },
+    { href: '/blog/en/experiments', label: 'Experiments' },
+    { href: '/blog/en/about', label: 'About' },
   ]
 };
 
@@ -32,7 +32,7 @@ const items = navItems[lang];
   <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-16">
       <!-- Logo/Name -->
-      <a href={lang === 'en' ? '/en' : '/'} class="font-bold text-xl text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+      <a href={lang === 'en' ? '/blog/en' : '/blog/'} class="font-bold text-xl text-gray-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
         Your Name
       </a>
 
@@ -54,7 +54,7 @@ const items = navItems[lang];
         <!-- Language Toggle -->
         <div class="flex items-center space-x-2">
           <a
-            href={currentPath.startsWith('/en') ? currentPath.replace('/en', '') : `/en${currentPath}`}
+            href={currentPath.startsWith('/blog/en') ? currentPath.replace('/blog/en', '/blog') : `/blog/en${currentPath.replace('/blog', '')}`}
             class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             {lang === 'zh' ? 'EN' : '中文'}
@@ -105,7 +105,7 @@ const items = navItems[lang];
         ))}
         <div class="flex items-center justify-between px-3 py-2">
           <a
-            href={currentPath.startsWith('/en') ? currentPath.replace('/en', '') : `/en${currentPath}`}
+            href={currentPath.startsWith('/blog/en') ? currentPath.replace('/blog/en', '/blog') : `/blog/en${currentPath.replace('/blog', '')}`}
             class="text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             {lang === 'zh' ? 'English' : '中文'}

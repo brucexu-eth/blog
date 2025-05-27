@@ -39,7 +39,7 @@ const activeExperiments = allExperiments
 ---
 
 <BaseLayout title="首页 - 个人博客" description="欢迎来到我的个人博客，这里分享我的思考、项目和经验。">
-  <Navigation currentPath="/" lang="zh" />
+  <Navigation currentPath="/blog/" lang="zh" />
 
   <main class="min-h-screen bg-gray-50 dark:bg-gray-900">
     <!-- Hero Section -->
@@ -57,7 +57,7 @@ const activeExperiments = allExperiments
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white">最新文章</h2>
             <a
-              href="/blog"
+              href="/blog/blog"
               class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
             >
               查看全部 →
@@ -68,7 +68,7 @@ const activeExperiments = allExperiments
               <ContentCard
                 title={post.data.title}
                 description={post.data.description}
-                href={`/blog/${post.slug}`}
+                href={`/blog/blog/${post.slug}`}
                 date={post.data.pubDate}
                 tags={post.data.tags}
                 image={post.data.heroImage}
@@ -86,7 +86,7 @@ const activeExperiments = allExperiments
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white">精选项目</h2>
             <a
-              href="/projects"
+              href="/blog/projects"
               class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
             >
               查看全部 →
@@ -97,7 +97,7 @@ const activeExperiments = allExperiments
               <ContentCard
                 title={project.data.title}
                 description={project.data.description}
-                href={`/projects/${project.slug}`}
+                href={`/blog/projects/${project.slug}`}
                 tags={project.data.tech}
                 image={project.data.image}
                 type="project"
@@ -114,7 +114,7 @@ const activeExperiments = allExperiments
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white">最新访谈</h2>
             <a
-              href="/interviews"
+              href="/blog/interviews"
               class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
             >
               查看全部 →
@@ -125,7 +125,7 @@ const activeExperiments = allExperiments
               <ContentCard
                 title={interview.data.title}
                 description={interview.data.description}
-                href={`/interviews/${interview.slug}`}
+                href={`/blog/interviews/${interview.slug}`}
                 date={interview.data.pubDate}
                 type="interview"
                 lang="zh"
@@ -141,7 +141,7 @@ const activeExperiments = allExperiments
           <div class="flex items-center justify-between mb-8">
             <h2 class="text-3xl font-bold text-gray-900 dark:text-white">进行中的实验</h2>
             <a
-              href="/experiments"
+              href="/blog/experiments"
               class="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium transition-colors"
             >
               查看全部 →
@@ -152,7 +152,7 @@ const activeExperiments = allExperiments
               <ContentCard
                 title={experiment.data.title}
                 description={experiment.data.description}
-                href={`/experiments/${experiment.slug}`}
+                href={`/blog/experiments/${experiment.slug}`}
                 date={experiment.data.pubDate}
                 tags={experiment.data.tech}
                 type="experiment"
@@ -174,7 +174,7 @@ const activeExperiments = allExperiments
           </p>
           <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a
-              href="/about"
+              href="/blog/about"
               class="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors"
             >
               了解更多关于我
